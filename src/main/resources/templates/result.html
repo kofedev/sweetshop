@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dulces Dueñas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<!--HEADER-->
+<div th:insert="header :: kotoheader"></div>
+<!--END-OF-HEADER-->
+<br><br><br><br><br><br><br><br>
+<div class="d-flex justify-content-center align-middle">
+    <h6
+            th:if='${error}' th:text='${error}' style='color: red; width: 300px; overflow-wrap: break-word; '>
+    </h6>
+</div>
+<div th:unless='${error}'>
+        <!-------SCRIPT POST-TRANSACTION---------->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script th:inline="javascript">
+            postProcessing();
+            function postProcessing() {
+                const urlToControllerForPostProcessing = "/post_payment";
+                $.ajax({
+                    url: urlToControllerForPostProcessing,
+                    contentType: "application/json",
+                    type: 'POST',
+                    success: function (receivedData) {
+                        document.getElementById("messageThanks").textContent = "¡Gracias!";
+                        document.getElementById("messageAboutPossibilityToCloseTheWindow").textContent =
+                            "Ahora puede cerrar el navegador :)";
+                        document.getElementById("waiting").style.display = "none";
+                        displayZeroQuantityItemsInCart();
+                    }
+                });
+            }
+        </script>
+        <!--------- END OF SCRIPT ---------->
+        <div class="d-flex justify-content-center align-middle">
+            <h1 class="text-primary message-font">
+                <span id="messageThanks"></span>
+            </h1>
+            <br><br>
+        </div>
+        <div class="d-flex justify-content-center align-middle">
+            <br><br>
+            <h6 class="text-primary message-font">
+                <span id="messageAboutPossibilityToCloseTheWindow">Por favor no cierre la página...</span>
+            </h6>
+        </div>
+        <div class="d-flex justify-content-center align-middle">
+            <br><br>
+            <div class="waiting" id="waiting"></div>
+        </div>
+</div>
+<br><br><br>
+<div class="container d-flex justify-content-center">
+    <div class="text-center">
+        <a href="/"><button type="button"
+                            class="btn btn-block btn-sm btn-transparent text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+            </svg>
+            oferta</button></a>
+    </div>
+</div>
+<div class="copyright text-center text-dark footer-sweet-one align-middle fixed-bottom">
+    <div class="container text-primary align-middle" style="font-size: xx-small">test mode | kofe.dev</div>
+</div>
+</body>
+</html>

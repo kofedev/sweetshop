@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dulces Dueñas | Entrega</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<!--HEADER-->
+<div th:insert="header :: kotoheader"></div>
+<!--END-OF-HEADER-->
+<br><br><br><br><br><br>
+<div id="mainContent" class="container justify-content-center">
+    <div class="container text-primary entrega-text">
+        Realizamos entregas gratuitas a localidades a 10 km de Dueñas, incluido Palencia.
+        Entregas a localidades a mayor distancia, incluido Valladolid, se acuerdan aparte
+    </div>
+    <div class="d-flex justify-content-center">
+            <img src="/img/mapa5.png" class="entrega-map" style="margin-top: 20px; margin-bottom: 20px;">
+    </div>
+    <div class="container text-primary entrega-text">
+        Disponemos de varias opciones de entrega:
+        <b>Estándar</b>: al domicilio, dos veces al día,
+        <b>Express</b>: entrega urgente en el horario acordado
+        <b>Recogida en tienda</b>: el pedido se puede recoger en nuestra tienda en el horario de 7 a 19hrs. Los productos se deben recoger en el mismo día.
+        <br><br>Haz tu pedido en <b>642 376 786</b>.
+        <br><br><b>¡Gracias!</b>
+    </div>
+    <div class="container d-flex justify-content-center" style="margin-top: 50px;">
+        <div class="text-center">
+            <a href="/"><button type="button"
+                                class="btn btn-block btn-sm btn-transparent text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                    <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+                </svg>oferta</button></a>
+        </div>
+    </div>
+</div>
+<!------PACKAGE FOOTER POSITION BEGIN---------->
+<div id="safeSpace">
+    <p>&nbsp;</p>
+</div>
+<div id="displaySpace">
+    <p>&nbsp;</p>
+</div>
+<!--FOOTER-->
+<div th:insert="footer :: kotofooter"></div>
+<!--END-OF-FOOTER-->
+<!-- footer package script for the page -->
+<script type="text/javascript" src="/js/footerXitroPositioner.js"></script>
+<script>
+    footerXitroPositioner();
+    window.addEventListener("resize", footerXitroPositioner);
+</script>
+<!------PACKAGE FOOTER POSITION END---------->
+</body>
+</html>

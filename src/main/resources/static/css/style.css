@@ -1,0 +1,233 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cantarell&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mali&display=swap');
+
+body {
+    /*background-color: #fbe5c8 !important;*/
+    /*width: fit-content;*/
+    /*width: fit-content;*/
+}
+
+.sweetfont {
+    font-family: 'Caveat', cursive;
+}
+
+.message-font {
+    font-family: 'Cantarell', sans-serif;
+}
+
+.message-font-mali {
+    font-family: 'Mali', cursive;
+}
+
+/*.sweetfont {*/
+/*    !*font-family: 'Caveat', cursive;*!*/
+
+/*}*/
+
+/* for BIG */
+@media only screen and (min-device-width: 700px) {
+    .table-display {
+        width: 800px;
+    }
+    .font-display {
+        font-size: x-large;
+    }
+    .font-display-pagesnums {
+        font-size: large;
+    }
+    .big-space {
+        height: 800px;
+    }
+    .img-display {
+        width: 300px;
+    }
+    .img-display-cart {
+        width: 300px;
+    }
+    .value-display {
+        width: 70px;
+    }
+    .entrega-map{
+        /*width: 600px;*/
+    }
+    .entrega-text {
+        width: 630px;
+    }
+}
+
+/* for SMALL */
+@media only screen and (max-device-width: 500px) {
+    .value-display {
+        width: 40px;
+    }
+    .font-display {
+        font-size: large;
+    }
+    .font-display-pagesnums {
+        font-size: large;
+    }
+    .big-space {
+        height: 50px;
+    }
+    .img-display {
+        width: 200px;
+    }
+    .img-display-cart {
+        width: 180px;
+    }
+    .entrega-map{
+        width: 350px;
+    }
+    .entrega-text {
+        padding: 0px;
+    }
+}
+
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: rgba(255, 245, 255, 0.69);
+}
+
+
+.navbar {
+    background-color: #e3c4e3 !important;
+}
+
+.bg-dulce {
+    background-color: #fbe5c8 !important;
+}
+
+.footer-sweet {
+    /*background-color: #8fdde7 !important;*/
+    background-color: #fbe5c8 !important;
+}
+
+.footer-sweet-one {
+    background-color: #e3c4e3 !important;
+}
+
+.sweetback {
+    background-color: #fbe5c8 !important;
+    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("/img/baa3.png");
+}
+
+.Qnav-item {
+    background-color: transparent;
+    background-image: none;
+}
+
+
+.btn-primary {
+    background-color: #4d037e !important;
+    border-color:     #4d037e !important;
+    color: white;
+}
+
+.btn-outline-primary {
+    background-color: white     !important;
+    border-color:     #4d037e   !important;
+    color:            #4d037e   !important;
+}
+
+.btn-footer {
+    background-color: #9d2e36 !important;
+    border-color:     #9d2e36 !important;
+    color: #fbe5c8;
+}
+
+.btn-outline-footer {
+    background-color: #fbe5c8 !important;
+    border-color:     #9d2e36 !important;
+    color:            #9d2e36 !important;
+}
+
+
+.btn-outline-main {
+    background-color: white !important;
+    border-color:     #9d2e36 !important;
+    color:            #9d2e36 !important;
+}
+
+.btn-main {
+    background-color: #9d2e36 !important;
+    border-color:     #9d2e36 !important;
+    color:            white !important;
+}
+
+/*.text-primary {*/
+/*    color:            #4d037e   !important;*/
+/*}*/
+.text-primary {
+    color:            #9d2e36   !important;
+}
+
+.btn-transparent {
+    background-color: transparent !important;
+    background-repeat: no-repeat !important;
+    background-image: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn-transparent-flash {
+    background-color: transparent !important;
+    background-repeat: no-repeat !important;
+    background-image: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transform: translateY(-15px);
+}
+
+.text-info{
+    color: #b68cb6 !important;
+}
+
+
+/* The element to apply the animation to */
+.waiting {
+    width: 30px;
+    height: 30px;
+    background-color: #ffffff;
+    border-style: solid;
+    border-color: #9d2e36;
+    animation-name: spin;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin_recalculate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.recalculate {
+    animation-name: spin_recalculate;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+

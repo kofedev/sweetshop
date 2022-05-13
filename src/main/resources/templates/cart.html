@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dulces Dueñas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<!--HEADER-->
+<div th:insert="header :: kotoheader"></div>
+<!--END-OF-HEADER-->
+<br><br><br><br><br><br>
+<div id="mainContent">
+    <div class="d-flex justify-content-center align-middle">
+         <h3 class="text-primary message-font">Cesta:</h3>
+    </div>
+    <!------------------->
+    <!------ TABLE ------>
+    <!------------------->
+    <div class="d-flex justify-content-center align-middle">
+        <table class="table-borderless table-sm table-responsive-sm align-middle text-primary"
+               style="border-collapse: separate; border-spacing: 0 2em;">
+            <tbody>
+            <tr th:each="item : ${itemList}">
+                <td style="display: none;">
+                    <span th:text="${item.id}" th:id="id + ${item.index}"></span>
+                </td>
+                <td>
+                    <div class='row'>
+                        <a th:href="'/item/' + ${item.id}" class="text-primary text-decoration-none">
+                            <span th:text="${item.title}" class="sweetfont font-display"></span></span></a>
+                    </div>
+                    <div class='row'>
+                        <a th:href="'/item/' + ${item.id}">
+                            <img class="img-display-cart" th:src="@{/getitemimg/{id}(id = ${item.id})}">
+                        </a>
+                    </div>
+                </td>
+                <td> </td>
+                <td th:text="${item.price}" class="sweetfont font-display"></td>
+                <td> </td>
+                <td>
+                    <input type="number"
+                           step="1"
+                           th:value="${item.chosenQuantity}"
+                           th:max="${item.quantity}"
+                           th:id="quantity + ${item.index}"
+                           class="text-primary value-display font-display"
+                           min="1">
+                </td>
+                <td>
+                    <a th:href=
+                               "@{/deleteFromCart/{id}(id=${item.id})}"><button class="btn btn-sm btn-transparent">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#9d2e36" class="bi bi-x-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container d-flex justify-content-center" style="height: 100px;">
+        <button id = "reCalculateButton"
+                class="btn btn-transparent btn-sm text-primary"
+                onclick="goToRecalculate(0)">
+            <div class="row">
+                <div class="col" id="recalculate_block" style="padding: 4px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                    </svg>
+                </div><div class="col" style="padding: 4px;">Recalcular</div>
+            </div>
+        </button>
+    </div>
+
+    <div class="container d-flex justify-content-center">
+        <div class="row text-primary">
+            <p>Pedido neto: <span th:text="${total}"reCalculateButton></span> &euro;<br>
+                IVA: <span th:text="${vat}"></span> &euro;<br>
+                <b>Bruto (total): <span th:text="${grand_total}"></span> &euro;</b></p>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="row text-primary">
+            <button class="btn btn-main" th:onclick="goToOrder()">
+                Tramitar el pedido
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
+                    <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="container d-flex justify-content-center">
+        <div class="row text-primary">
+                <button class="btn btn-transparent btn-sm text-primary" onclick="emptyCartIsPressed()">
+
+                    <svg id="cross_0" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#9d2e36" class="bi bi-x-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+
+                    <svg id="cross_1" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>
+
+                    Vaciar la cesta</button>
+<!--            </a>-->
+        </div>
+    </div>
+    <br>
+    <div class="container d-flex justify-content-center">
+        <div class="text-center">
+            <a href="/"><button type="button"
+                                    class="btn btn-block btn-sm btn-transparent text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                    <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+                </svg>
+                oferta</button></a>
+        </div>
+    </div>
+</div>
+<!------PACKAGE FOOTER POSITION BEGIN (plus id mainContent !)---------->
+<div id="safeSpace">
+    <p>&nbsp;</p>
+</div>
+<div id="displaySpace">
+    <p>&nbsp;</p>
+</div>
+<!--FOOTER-->
+<div th:insert="footer :: kotofooter"></div>
+<!--END-OF-FOOTER-->
+<!-- footer package script for the page -->
+<script type="text/javascript" src="/js/footerXitroPositioner.js"></script>
+<script>
+    footerXitroPositioner();
+    window.addEventListener("resize", footerXitroPositioner);
+</script>
+<!------PACKAGE FOOTER POSITION END---------->
+<!-------SCRIPT ---------->
+<!-- [[${returnSignature}]] -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script th:inline="javascript">
+    let listSize = 0;
+    /*<![CDATA[*/
+    listSize = [[${listsize}]];
+    /*]]>*/
+    // let form = document.querySelector("form");
+    // form.addEventListener("submit", goToRecalculate());
+    function emptyCartIsPressed() {
+        if (listSize != 0) {
+            document.getElementById("cross_0").style.display = "none";
+            document.getElementById("cross_1").style.display = "";
+            window.location.assign("/clearCart");
+        }
+    }
+    function goToOrder() {
+        if (listSize != 0) {
+            goToRecalculate(1); // recalculate and redirect to ORDER
+        }
+    }
+    const urlToOrder = "/order";
+    const urlGo = "/recalculate";
+    const urlAfterCallToRedirect = "/cart";
+    function goToRecalculate(mode) {
+        // mode = 0, it is the recalculate process only
+        // mode = 1, it is the recalculate process + redirect to order
+        //let elementReCalculateButton = document.getElementById("reCalculateButton");
+        let elementRecalculate_symbol = document.getElementById("recalculate_block");
+        //elementReCalculateButton.setAttribute("class", "btn btn-primary");
+        if (mode == 0 && listSize > 0) elementRecalculate_symbol.setAttribute("class", "col recalculate");
+        if (listSize > 0) {
+            const currentQuantityValues = [];
+            for (let i = 0; i < listSize; i++) {
+                let element_quantity_field = document.getElementById('quantity' + i);
+                let element_ID_field = document.getElementById('id' + i);
+                //console.log(element_ID_field.textContent + ' | ' + element_quantity_field.getAttribute("value"));
+                //console.log(element_ID_field.textContent + ' | ' + element_quantity_field.value);
+                currentQuantityValues.push(
+                    '{' +
+                    'id'    + ':' + element_ID_field.textContent + ',' +
+                    'value' + ':' + element_quantity_field.value +
+                    '}'
+                );
+            }
+            $.ajax({
+                url: urlGo,
+                contentType: "application/json",
+                type: 'POST',
+                data: JSON.stringify(currentQuantityValues),
+                success: function (receivedData) {
+                    // if OK -> redirect to cart
+                    if (mode == 0) {
+                        window.location.assign(urlAfterCallToRedirect);
+                    }
+                    if (mode == 1) {
+                        window.location.assign(urlToOrder);
+                    }
+                },
+                statusCode: {
+                    409: function () {
+                    }
+                }
+            });
+        }
+        //elementReCalculateButton.setAttribute("class", "btn btn-outline-primary");
+        //elementRecalculate_symbol.setAttribute("class", "col");
+    }
+</script>
+<!--------- END OF SCRIPT ---------->
+</body>
+</html>

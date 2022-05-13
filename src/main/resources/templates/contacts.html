@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dulces Dueñas | Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<!--HEADER-->
+<div th:insert="header :: kotoheader"></div>
+<!--END-OF-HEADER-->
+<br><br><br><br><br><br><br>
+<DIV id="mainContent">
+<div class="d-flex justify-content-center text-primary">
+    <div>
+        <div th:if="${resultMessage}" class="row text-info message-font"
+             style="width: 300px; margin-top: 10px; margin-bottom: 30px;">
+            <i><b><span th:text="${resultMessage}"></span></b></i>
+        </div>
+        <div class="row text-primary" style="max-width: 350px;">
+            <p>Puedes ponerte en contacto con nosotros llamando al <b>642&nbsp;376&nbsp;786</b>,
+                o envíanos un email al <a class="text-primary" href="mailto:info@palencia.dulcesduenas.com">info@palencia.dulcesduenas.com</a>
+                <br><br>Por favor, completa el formulario, nos pondremos en contacto contigo lo antes posible.</p>
+        </div>
+        <div class="row">
+                <form action="#" th:action="@{/sendMessage}" th:object="${message}" method="POST" style="max-width: 350px;">
+                    <input type="hidden" th:field="*{userName}" />
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" th:field="*{name}"
+                               class="form-control text-primary" id="name" placeholder="Nombre"
+                               maxlength="250" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" th:field="*{email}" class="form-control text-primary"
+                               id="email" aria-describedby="emailHelp" placeholder="email@email.es"
+                               maxlength="250" required>
+                        <small id="emailHelp" class="form-text text-muted" style="font-size: xx-small">
+                            Nunca compartiremos su correo electrónico con nadie más.
+                        </small>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea th:field="*{text}" class="form-control text-primary"
+                                  id="message" rows="4" maxlength="250" required></textarea>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-sm btn-footer">Enviar</button>
+                </form>
+        </div>
+    </div>
+</div>
+<div class="container d-flex justify-content-center" style="margin-top: 50px;">
+    <div class="text-center">
+        <a href="/"><button type="button"
+                            class="btn btn-block btn-sm btn-transparent text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+            </svg>oferta</button></a>
+    </div>
+</div>
+</DIV>
+<!------PACKAGE FOOTER POSITION BEGIN---------->
+<div id="safeSpace">
+    <p>&nbsp;</p>
+</div>
+<div id="displaySpace">
+    <p>&nbsp;</p>
+</div>
+<!--FOOTER-->
+<div th:insert="footer :: kotofooter"></div>
+<!--END-OF-FOOTER-->
+<!-- footer package script for the page -->
+<script type="text/javascript" src="/js/footerXitroPositioner.js"></script>
+<script>
+    footerXitroPositioner();
+    window.addEventListener("resize", footerXitroPositioner);
+</script>
+<!------PACKAGE FOOTER POSITION END---------->
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dulces Dueñas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<!--HEADER-->
+<div th:insert="header :: kotoheader"></div>
+<!--END-OF-HEADER-->
+<br><br><br><br><br><br>
+<div class="container text-primary message-font-mali" id="mainContent">
+    <div class="d-flex justify-content-center align-middle">
+        <h3 class="text-primary message-font">Su pedido:</h3>
+    </div>
+    <div class="d-flex justify-content-center align-middle" style="margin-top: 20px;">
+        <div class="">
+            <form action="#" th:action="@{/checkout}" th:object="${order}" method="POST">
+                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:field="*{cookieToken}" />
+                <label>Pedido neto:</label>
+                <input type="hidden" th:field="*{total_netto_without_delivery}">
+                <span class="text-dark" th:text="*{total_netto_without_delivery}" style="width: 250px;"></span>
+                <span class="text-dark"> &euro;</span>
+                <br>
+                <label>Entrega:</label>
+                <input type="hidden" th:field="*{delivery_price_netto}">
+                <span class="text-dark" th:text="*{delivery_price_netto}" style="width: 250px;"></span>
+                <span class="text-dark"> &euro;</span>
+                <br>
+                <label>IVA:</label>
+                <input type="hidden" th:field="*{vat_value}">
+                <span class="text-dark" th:text="*{vat_value}" style="width: 250px;"></span>
+                <span class="text-dark"> &euro;</span>
+                <br>
+                <label>Bruto (total):</label>
+                <input type="hidden" th:field="*{total_brutto}">
+                <span class="text-dark" th:text="*{total_brutto}" style="width: 250px;"></span>
+                <span class="text-dark"> &euro;</span>
+                <br><br>
+                <label>Name:</label>
+                <input type="hidden" th:field="*{name}" required id="name">
+                <span class="text-dark" th:text="*{name}" style="width: 250px; overflow-wrap: break-word;"></span>
+                <br>
+                <label>Delivery address:</label>
+                <input type="hidden" th:field="*{address}" id="address">
+                <span class="text-dark" th:text="*{address}" style="width: 250px; overflow-wrap: break-word;"></span>
+                <br>
+                <label>Phone:</label>
+                <input type="hidden" th:field="*{phone}" id = "phone">
+                <span class="text-dark" th:text="*{phone}" style="width: 250px; overflow-wrap: break-word;"></span>
+                <br>
+                <label>Email:</label>
+                <input type="hidden" th:field="*{email}" id = "email">
+                <span class="text-dark" th:text="*{email}" style="width: 250px; overflow-wrap: break-word;"></span>
+                <br><br>
+                <label>Notes:</label>
+                <input type="hidden" th:field="*{notes}" id = "notes">
+                <p class="text-dark" th:text="*{notes}" style="width: 250px; overflow-wrap: break-word;"></p>
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-block btn-sm btn-main" type="submit">
+                        Tramitar pedido
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
+                            <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
+                        </svg>
+
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center align-middle">
+        <div class="text-center">
+            <a href="/order"><button class="btn btn-block btn-sm btn-transparent text-primary" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                    <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+                </svg>Volver</button></a>
+        </div>
+    </div>
+</div>
+<!------PACKAGE FOOTER POSITION BEGIN (plus id mainContent !)---------->
+<div id="safeSpace">
+    <p>&nbsp;</p>
+</div>
+<div id="displaySpace">
+    <p>&nbsp;</p>
+</div>
+<!--FOOTER-->
+<div th:insert="footer :: kotofooter"></div>
+<!--END-OF-FOOTER-->
+<!-- footer package script for the page -->
+<script type="text/javascript" src="/js/footerXitroPositioner.js"></script>
+<script>
+    footerXitroPositioner();
+    window.addEventListener("resize", footerXitroPositioner);
+</script>
+<!------PACKAGE FOOTER POSITION END---------->
+</body>
+</html>
